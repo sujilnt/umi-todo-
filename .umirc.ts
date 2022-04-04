@@ -1,11 +1,6 @@
-import { defineConfig } from 'umi';
-
-export default defineConfig({
-  nodeModulesTransform: {
-    type: 'none',
+export default {
+  dva: {
+    immer: true, // Enable dva-immer for elegant reducer writing experience
   },
-  routes: [
-    { path: '/', component: '@/pages/index' },
-  ],
-  fastRefresh: {},
-});
+  antd: {},
+};
