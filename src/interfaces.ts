@@ -2,5 +2,11 @@ import type { TodoState } from '@/pages/index/model';
 
 export interface GlobalState {
   todos: TodoState;
-  loading: any; //Todo find right type
+  loading: DVALoading;
+}
+
+interface DVALoading {
+  global: boolean;
+  models: Record<string, boolean>;
+  effects: Record<string, boolean>;
 }

@@ -24,6 +24,7 @@ function Index(props) {
     return onCleanup;
   }, []);
 
+  //Todo Remove
   console.log('todos', todos);
 
   return (

@@ -1,4 +1,5 @@
 import type { Put } from 'redux-saga/effects';
+import api from '@/service/api';
 
 interface Todo {
   title: string;
@@ -36,14 +37,7 @@ export default {
       _payload: any,
       { put, call }: { put: Put; call: Function },
     ) {
-      const todos: Todo[] = [
-        {
-          title: 'test title',
-          id: '1111',
-          description: 'test description:',
-        },
-      ];
-
+      const todos: Todo[] = yield call(() => api.todos.getAllTodos());
       yield put.resolve({
         type: TodoAction.SET_TODOS,
         todos,

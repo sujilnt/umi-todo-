@@ -1,0 +1,43 @@
+openapi: "3.0.0"
+info:
+  title: Todos
+  description: A simple full stack todo app
+  version: 1.0.0
+paths:
+  /todos:
+   get:
+     tags:
+       - todos
+     summary:   gets All List of todos
+     description: gets All List of todos
+     operationId: getAllTodos
+     responses:
+       200:
+        description: All  the todos are retrieved from the backend
+        content:
+          application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Todos"
+components:
+   schemas:
+     Todos:
+       type: object
+       description: A model to record Todo
+       required:
+         - id
+         - title
+         - description
+         - uploadedTime
+       properties:
+         id:
+           type: string
+         title:
+           type: string
+         description:
+           type: string
+         uploadedTime:
+            type: string
+            format: date-time
+
