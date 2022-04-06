@@ -62,7 +62,10 @@ export default {
           todos,
         });
       } catch (e) {
-        console.error(e);
+        // todo use actual error.json()
+        notification.error({
+          message: 'could not fetch todos from the server',
+        });
       }
     },
     *[TodoAction.DELETE_TODOS](
@@ -85,7 +88,11 @@ export default {
         notification.success({
           message: 'todos deleted successfully',
         });
-      } catch (e) {}
+      } catch (e) {
+        notification.error({
+          message: 'could not delete todos',
+        });
+      }
     },
   },
 };
