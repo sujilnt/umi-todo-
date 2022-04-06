@@ -1,9 +1,9 @@
 import moment from 'moment';
-import { Todos } from '@/api';
 
+import type { Todos } from '@/api';
 import type { Request, Response } from 'express';
 
-const todos: Todos[] = [
+let todos: Todos[] = [
   {
     id: '1',
     title: 'waking early',
@@ -40,6 +40,20 @@ export default {
   'GET /todos': (request: Request, response: Response) => {
     setTimeout(() => {
       response.send(todos);
-    }, 6000);
+    }, 3000);
+  },
+
+  'DELETE /todos': (request: Request, response: Response) => {
+    setTimeout(() => {
+      const todoIds = request.body;
+      /**
+       *  when deleting todos, mutating the todos array because
+       *  when re-fetched get todos endpoint after deleting the todos, the deleted
+       *  todos are removed.
+       */
+      todos = todos.filter(({ id }) => !todoIds.includes(id));
+
+      response.sendStatus(200);
+    }, 3000);
   },
 };

@@ -15,10 +15,63 @@
 import * as runtime from '../runtime';
 import { Todos, TodosFromJSON, TodosToJSON } from '../models';
 
+export interface DeleteTodosByIdsRequest {
+  requestBody: Array<string>;
+}
+
 /**
  *
  */
 export class TodosApi extends runtime.BaseAPI {
+  /**
+   * deleting todos based on todo id
+   * deletes the List of todos
+   */
+  async deleteTodosByIdsRaw(
+    requestParameters: DeleteTodosByIdsRequest,
+    initOverrides?: RequestInit,
+  ): Promise<runtime.ApiResponse<void>> {
+    if (
+      requestParameters.requestBody === null ||
+      requestParameters.requestBody === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'requestBody',
+        'Required parameter requestParameters.requestBody was null or undefined when calling deleteTodosByIds.',
+      );
+    }
+
+    const queryParameters: any = {};
+
+    const headerParameters: runtime.HTTPHeaders = {};
+
+    headerParameters['Content-Type'] = 'application/json';
+
+    const response = await this.request(
+      {
+        path: `/todos`,
+        method: 'DELETE',
+        headers: headerParameters,
+        query: queryParameters,
+        body: requestParameters.requestBody,
+      },
+      initOverrides,
+    );
+
+    return new runtime.VoidApiResponse(response);
+  }
+
+  /**
+   * deleting todos based on todo id
+   * deletes the List of todos
+   */
+  async deleteTodosByIds(
+    requestParameters: DeleteTodosByIdsRequest,
+    initOverrides?: RequestInit,
+  ): Promise<void> {
+    await this.deleteTodosByIdsRaw(requestParameters, initOverrides);
+  }
+
   /**
    * gets All List of todos
    * gets All List of todos
